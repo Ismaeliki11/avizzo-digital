@@ -20,15 +20,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   return (
-    <html lang="pt-BR">
+    <html lang={locale}>
       <body
         className={`${interSans.variable} ${outfitDisplay.variable} antialiased selection:bg-[#1BCC94]/30 selection:text-white`}
       >
