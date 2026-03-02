@@ -16,8 +16,8 @@ export default function Home() {
 
       {/* Background Layer (Non-blocking) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full mix-blend-screen" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/20 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] md:w-[30%] md:h-[50%] bg-[#0f7a58]/20 blur-[100px] md:blur-[150px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
       </div>
 
       <Navbar activeItem="Início" />
@@ -31,7 +31,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="order-2 md:order-1 relative w-full aspect-[3/4] md:max-w-md mx-auto"
+            className="order-2 md:order-1 relative w-full aspect-[3/4] md:max-w-md mx-auto will-change-transform"
           >
             <div className="w-full h-full glass-panel overflow-hidden relative group">
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
@@ -42,6 +42,7 @@ export default function Home() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
             </div>
           </motion.div>
@@ -81,9 +82,9 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16 md:mb-20"
+            className="text-center mb-16 md:mb-20 will-change-[opacity,transform]"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight">
               Nosso processo de <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#0f7a58]">trabalho</span>
@@ -100,9 +101,9 @@ export default function Home() {
                 key={step.num}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="relative glass-panel p-8 md:p-10 border hover:border-primary/40 transition-colors duration-500 group overflow-hidden"
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="relative glass-panel p-8 md:p-10 border hover:border-primary/40 transition-colors duration-500 group overflow-hidden will-change-[opacity,transform]"
               >
                 {/* Huge Background Number */}
                 <div className="absolute -right-4 -top-8 text-[140px] font-display font-bold text-white/[0.02] group-hover:text-primary/[0.05] transition-colors duration-500 pointer-events-none select-none">
@@ -138,9 +139,9 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="mb-16 md:mb-20 md:w-3/4 lg:w-2/3"
+            className="mb-16 md:mb-20 md:w-3/4 lg:w-2/3 will-change-[opacity,transform]"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight mb-6">
               Transformando a forma de <span className="text-primary">comunicar</span>
@@ -189,9 +190,9 @@ export default function Home() {
                 key={service.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group relative h-auto md:h-[380px] rounded-[32px] overflow-hidden md:cursor-pointer touch-manipulation"
+                className="group relative h-auto md:h-[380px] rounded-[32px] overflow-hidden md:cursor-pointer touch-manipulation will-change-[opacity,transform]"
               >
                 {/* Mobile View (Static & Intuitive) */}
                 <div className="md:hidden flex flex-col h-full bg-surface-glass border border-border-glass backdrop-blur-md rounded-[32px] p-8 relative z-10 transition-colors hover:border-primary/30">

@@ -32,5 +32,6 @@ body {
 
 /* Base Liquid Glass Utility Classes for fallback if needed, or we just rely on Tailwind */
 .glass-panel {
-  @apply bg-surface-glass border border-border-glass backdrop-blur-xl rounded-2xl;
+  @apply bg-surface-glass border border-border-glass rounded-2xl backdrop-blur-md md:backdrop-blur-xl;
+  will-change: transform, opacity;
 }

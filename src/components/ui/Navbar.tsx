@@ -46,7 +46,7 @@ export default function Navbar({ activeItem }: NavbarProps) {
         <>
             <nav
                 className={`fixed top-0 w-full z-[100] transition-all duration-700 ${isScrolled || isMenuOpen
-                    ? "py-3 bg-background/80 backdrop-blur-2xl border-b border-white/[0.05] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+                    ? "py-3 bg-background/80 backdrop-blur-md md:backdrop-blur-2xl border-b border-white/[0.05] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
                     : "py-6 bg-transparent border-b border-transparent"
                     }`}
             >

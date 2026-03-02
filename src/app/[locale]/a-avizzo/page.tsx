@@ -17,8 +17,8 @@ export default function AAvizzo() {
 
             {/* Background Layer (Non-blocking) */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full mix-blend-screen" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/20 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] md:w-[30%] md:h-[50%] bg-[#0f7a58]/20 blur-[100px] md:blur-[150px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
             </div>
 
             <Navbar activeItem="A Avizzo" />
@@ -49,9 +49,9 @@ export default function AAvizzo() {
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-40px" }}
                             transition={{ duration: 0.6 }}
-                            className="lg:row-span-2 glass-panel p-8 md:p-12 relative overflow-hidden group border-border-glass hover:border-primary/30 transition-colors"
+                            className="lg:row-span-2 glass-panel p-8 md:p-12 relative overflow-hidden group border-border-glass hover:border-primary/30 transition-colors will-change-[opacity,transform]"
                         >
                             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] group-hover:bg-primary/10 transition-colors duration-700" />
 
@@ -77,9 +77,9 @@ export default function AAvizzo() {
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-20px" }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="glass-panel p-8 md:p-10 border-border-glass hover:border-primary/30 transition-colors relative overflow-hidden"
+                            className="glass-panel p-8 md:p-10 border-border-glass hover:border-primary/30 transition-colors relative overflow-hidden will-change-[opacity,transform]"
                         >
                             <h3 className="text-2xl font-display font-bold text-white mb-4 flex items-center gap-3">
                                 <span className="w-8 h-px bg-primary"></span>
@@ -94,9 +94,9 @@ export default function AAvizzo() {
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-20px" }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="glass-panel p-8 md:p-10 border-border-glass hover:border-primary/30 transition-colors relative overflow-hidden"
+                            className="glass-panel p-8 md:p-10 border-border-glass hover:border-primary/30 transition-colors relative overflow-hidden will-change-[opacity,transform]"
                         >
                             <h3 className="text-2xl font-display font-bold text-white mb-4 flex items-center gap-3">
                                 <span className="w-8 h-px bg-primary"></span>

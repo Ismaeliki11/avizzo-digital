@@ -41,8 +41,8 @@ export default function Portfolio() {
 
             {/* Background Layer */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full mix-blend-screen" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/20 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] md:w-[30%] md:h-[50%] bg-[#0f7a58]/20 blur-[100px] md:blur-[150px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
             </div>
 
             <Navbar activeItem="Portfólio" />
@@ -57,7 +57,7 @@ export default function Portfolio() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold mb-6"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold mb-6 will-change-transform"
                         >
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -90,9 +90,9 @@ export default function Portfolio() {
                                 key={video.id}
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
+                                viewport={{ once: true, margin: "-40px" }}
                                 transition={{ duration: 0.8 }}
-                                className={`group flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-16 items-stretch`}
+                                className={`group flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-16 items-stretch will-change-[opacity,transform]`}
                             >
                                 {/* Video Container (Glass Card) */}
                                 <div className="w-full md:w-3/5 shrink-0 relative">
@@ -170,9 +170,9 @@ export default function Portfolio() {
                                     key={i}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ once: true, margin: "-20px" }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="group relative p-8 md:p-10 rounded-[2.5rem] bg-surface-glass border border-white/5 backdrop-blur-sm overflow-hidden hover:border-primary/30 transition-all duration-500"
+                                    className="group relative p-8 md:p-10 rounded-[2.5rem] bg-surface-glass border border-white/5 backdrop-blur-sm overflow-hidden hover:border-primary/30 transition-all duration-500 will-change-[opacity,transform]"
                                 >
                                     <div className="absolute top-0 right-0 p-8 text-7xl font-display font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors duration-500 pointer-events-none">
                                         {item.step}
