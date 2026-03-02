@@ -5,21 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Navbar from "@/components/ui/Navbar";
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const params = useParams();
-  const locale = params.locale;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const locale = params.locale as string;
 
   return (
     <div className="min-h-screen bg-background text-zinc-100 overflow-x-hidden selection:bg-primary/30">
@@ -30,99 +20,7 @@ export default function Home() {
         <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
       </div>
 
-      {/* Navigation Bar (Glassmorphism) */}
-      <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
-          ? "bg-surface-glass/80 border-border-glass backdrop-blur-xl shadow-lg"
-          : "bg-transparent border-transparent"
-          }`}
-      >
-        <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? "py-3" : "py-4"}`}>
-          <div className="flex items-center gap-2">
-            <Link href={`/${locale}`}>
-              <Image
-                src="/logo-completo.webp"
-                alt="Avizzo Digital"
-                width={140}
-                height={40}
-                className="object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          <div className={`hidden md:flex items-center gap-8 px-8 py-3 transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}>
-            {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((item, i) => (
-              <Link
-                key={item}
-                href={item === 'A Avizzo' ? `/${locale}/a-avizzo` : item === 'Portfólio' ? `/${locale}/portfolio` : item === 'Início' ? `/${locale}` : `#${item.toLowerCase().replace(' ', '-')}`}
-                className={`text-sm font-medium transition-colors hover:text-primary ${i === 0 ? 'text-primary' : 'text-zinc-300'}`}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <a href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className={`px-6 py-2.5 text-sm font-medium text-white hover:bg-surface-glass hidden sm:block transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}>
-              WhatsApp
-            </a>
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden p-2.5 text-white z-[100] relative transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}
-            >
-              {isMenuOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" /></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Overlay */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsMenuOpen(false)}
-                className="fixed inset-0 z-[80] bg-black/60 backdrop-blur-sm md:hidden"
-              />
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm z-[90] bg-[#0A0A0A] border-l border-border-glass shadow-2xl md:hidden pt-24 px-8"
-              >
-                <nav className="flex flex-col gap-8">
-                  {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((item) => (
-                    <Link
-                      key={item}
-                      href={item === 'A Avizzo' ? `/${locale}/a-avizzo` : item === 'Portfólio' ? `/${locale}/portfolio` : item === 'Início' ? `/${locale}` : `#${item.toLowerCase().replace(' ', '-')}`}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="text-2xl font-display font-bold text-white hover:text-primary transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                  <a
-                    href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="mt-4 bg-primary text-black text-center py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(27,204,148,0.3)]"
-                  >
-                    WhatsApp
-                  </a>
-                </nav>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </nav>
+      <Navbar activeItem="Início" />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 flex min-h-screen items-center">
@@ -390,10 +288,10 @@ export default function Home() {
             {/* Quick Links */}
             <div className="flex flex-col gap-4">
               <h4 className="text-white font-display font-bold text-lg mb-2">Navegação</h4>
-              {['Início', 'A Avizzo', 'Portfólio', 'Nossos Serviços', 'Portal'].map((link) => (
+              {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((link) => (
                 <Link
                   key={link}
-                  href={link === 'A Avizzo' ? `/${locale}/a-avizzo` : link === 'Portfólio' ? `/${locale}/portfolio` : link === 'Início' ? `/${locale}` : `#${link.toLowerCase().replace(' ', '-')}`}
+                  href={link === 'A Avizzo' ? `/${locale}/a-avizzo` : link === 'Portfólio' ? `/${locale}/portfolio` : link === 'Início' ? `/${locale}` : link === 'Portal' ? `/${locale}/portal` : `/${locale}/contato`}
                   className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
                 >
                   {link}
@@ -405,43 +303,37 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               <h4 className="text-white font-display font-bold text-lg mb-2">Suporte & Legal</h4>
               {['Central de Ajuda', 'Política de Privacidade', 'Termos de Serviço', 'Portal do Cliente'].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
-                >
-                  {link}
-                </a>
+                link === 'Portal do Cliente' ? (
+                  <Link
+                    key={link}
+                    href={`/${locale}/portal`}
+                    className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
+                  >
+                    {link}
+                  </Link>
+                ) : (
+                  <a
+                    key={link}
+                    href="#"
+                    className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
+                  >
+                    {link}
+                  </a>
+                )
               ))}
             </div>
 
-            {/* Contact */}
+            {/* Contact Compact */}
             <div className="flex flex-col gap-4">
               <h4 className="text-white font-display font-bold text-lg mb-2">Contato</h4>
-
-              <div className="group flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                <div className="flex flex-col">
-                  <span className="text-sm text-zinc-400 font-medium">WhatsApp</span>
-                  <a href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors text-sm">(91) 98155-5377</a>
-                </div>
-              </div>
-
-              <div className="group flex items-start gap-3 mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-                <div className="flex flex-col">
-                  <span className="text-sm text-zinc-400 font-medium">Email Institucional</span>
-                  <a href="mailto:contato@avizzodigital.com.br" className="text-white hover:text-primary transition-colors text-sm">contato@avizzodigital.com.br</a>
-                </div>
-              </div>
-
-              <div className="group flex items-start gap-3 mt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                <div className="flex flex-col">
-                  <span className="text-sm text-zinc-400 font-medium">Localização</span>
-                  <span className="text-white text-sm">Belém, PA - Brasil</span>
-                </div>
-              </div>
+              <p className="text-zinc-400 text-xs font-medium">Tem alguma dúvida ou curiosidade?</p>
+              <a href={`/${locale}/contato`} className="px-6 py-3 bg-primary/10 border border-primary/20 text-primary text-xs font-bold rounded-xl hover:bg-primary hover:text-black transition-all text-center">
+                PÁGINA DE CONTATO
+              </a>
+              <a href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors text-xs flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                (91) 98155-5377
+              </a>
             </div>
 
           </div>
@@ -451,7 +343,7 @@ export default function Home() {
             <p className="text-zinc-500 text-sm font-medium">
               © {new Date().getFullYear()} Avizzo Digital. Todos os direitos reservados.
             </p>
-            <div className="flex items-center gap-2 text-zinc-500 text-sm font-medium hover:text-primary transition-colors cursor-pointer group">
+            <div className="flex items-center gap-2 text-zinc-500 text-sm font-medium">
               <span>Feito com ❤️ por Avizzo Digital</span>
             </div>
           </div>

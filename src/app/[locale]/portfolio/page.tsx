@@ -6,20 +6,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
+import Navbar from "@/components/ui/Navbar";
+
 export default function Portfolio() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
     const params = useParams();
-    const locale = params.locale;
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    const locale = params.locale as string;
 
     const videos = [
         {
@@ -54,98 +45,8 @@ export default function Portfolio() {
                 <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
             </div>
 
-            {/* Navigation Bar */}
-            <nav
-                className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
-                    ? "bg-surface-glass/80 border-border-glass backdrop-blur-xl shadow-lg"
-                    : "bg-transparent border-transparent"
-                    }`}
-            >
-                <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? "py-3" : "py-4"}`}>
-                    <div className="flex items-center gap-2">
-                        <Link href={`/${locale}`}>
-                            <Image
-                                src="/logo-completo.webp"
-                                alt="Avizzo Digital"
-                                width={140}
-                                height={40}
-                                className="object-contain"
-                                priority
-                            />
-                        </Link>
-                    </div>
+            <Navbar activeItem="Portfólio" />
 
-                    <div className={`hidden md:flex items-center gap-8 px-8 py-3 transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}>
-                        {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((item, i) => (
-                            <Link
-                                key={item}
-                                href={item === 'Início' ? `/${locale}` : item === 'Portfólio' ? `/${locale}/portfolio` : item === 'A Avizzo' ? `/${locale}/a-avizzo` : `/${locale}/#${item.toLowerCase().replace(' ', '-')}`}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${item === 'Portfólio' ? 'text-primary' : 'text-zinc-300'}`}
-                            >
-                                {item}
-                            </Link>
-                        ))}
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                        <a href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className={`px-6 py-2.5 text-sm font-medium text-white hover:bg-surface-glass hidden sm:block transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}>
-                            WhatsApp
-                        </a>
-
-                        <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`md:hidden p-2.5 text-white z-[100] relative transition-all duration-300 rounded-full border ${isScrolled ? 'border-transparent bg-transparent' : 'border-border-glass bg-surface-glass backdrop-blur-md'}`}
-                        >
-                            {isMenuOpen ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" x2="6" y1="6" y2="18" /><line x1="6" x2="18" y1="6" y2="18" /></svg>
-                            ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
-                            )}
-                        </button>
-                    </div>
-                </div>
-
-                <AnimatePresence>
-                    {isMenuOpen && (
-                        <>
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="fixed inset-0 z-[80] bg-black/60 backdrop-blur-sm md:hidden"
-                            />
-                            <motion.div
-                                initial={{ x: "100%" }}
-                                animate={{ x: 0 }}
-                                exit={{ x: "100%" }}
-                                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                                className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm z-[90] bg-[#0A0A0A] border-l border-border-glass shadow-2xl md:hidden pt-24 px-8"
-                            >
-                                <nav className="flex flex-col gap-8">
-                                    {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((item) => (
-                                        <Link
-                                            key={item}
-                                            href={item === 'Início' ? `/${locale}` : item === 'Portfólio' ? `/${locale}/portfolio` : item === 'A Avizzo' ? `/${locale}/a-avizzo` : `/${locale}/#${item.toLowerCase().replace(' ', '-')}`}
-                                            onClick={() => setIsMenuOpen(false)}
-                                            className="text-2xl font-display font-bold text-white hover:text-primary transition-colors"
-                                        >
-                                            {item}
-                                        </Link>
-                                    ))}
-                                    <a
-                                        href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer"
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="mt-4 bg-primary text-black text-center py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(27,204,148,0.3)]"
-                                    >
-                                        WhatsApp
-                                    </a>
-                                </nav>
-                            </motion.div>
-                        </>
-                    )}
-                </AnimatePresence>
-            </nav>
 
             <main className="relative z-10 pt-32 pb-24 md:pt-44 md:pb-32">
                 <div className="max-w-7xl mx-auto px-6">
@@ -183,7 +84,7 @@ export default function Portfolio() {
                     </div>
 
                     {/* Featured Video Grid */}
-                    <div className="grid grid-cols-1 gap-16 md:gap-24">
+                    <div className="grid grid-cols-1 gap-20 md:gap-32">
                         {videos.map((video, index) => (
                             <motion.div
                                 key={video.id}
@@ -191,13 +92,14 @@ export default function Portfolio() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
                                 transition={{ duration: 0.8 }}
-                                className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-10 md:gap-16 items-center`}
+                                className={`group flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 md:gap-16 items-stretch`}
                             >
-                                {/* Video Container */}
-                                <div className="w-full md:w-[60%] shrink-0 group">
-                                    <div className="relative aspect-video rounded-3xl overflow-hidden glass-panel border-border-glass group-hover:border-primary/50 transition-all duration-500 shadow-2xl">
+                                {/* Video Container (Glass Card) */}
+                                <div className="w-full md:w-3/5 shrink-0 relative">
+                                    <div className="relative aspect-video rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-700 group-hover:border-primary/40 group-hover:scale-[1.01]">
+                                        <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-700 z-10 pointer-events-none" />
                                         <iframe
-                                            className="absolute inset-0 w-full h-full"
+                                            className="absolute inset-0 w-full h-full z-0"
                                             src={`https://www.youtube.com/embed/${video.id}`}
                                             title={video.title}
                                             frameBorder="0"
@@ -205,70 +107,119 @@ export default function Portfolio() {
                                             allowFullScreen
                                         ></iframe>
                                     </div>
-                                </div>
 
-                                {/* Content Container */}
-                                <div className="w-full flex flex-col items-start">
-                                    <div className="text-primary font-bold text-sm tracking-widest uppercase mb-4 opacity-80">
+                                    {/* Floating Category Badge (Desktop only or adjusted for mobile) */}
+                                    <div className="absolute -top-4 -left-4 md:-left-6 px-6 py-2 rounded-2xl bg-surface-glass border border-white/10 backdrop-blur-xl text-primary font-bold text-xs tracking-widest uppercase shadow-xl z-20">
                                         {video.category}
                                     </div>
-                                    <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                        {video.title}
-                                    </h2>
-                                    <p className="text-lg text-zinc-400 font-medium leading-relaxed mb-8">
-                                        {video.description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-3">
-                                        {video.tags.map(tag => (
-                                            <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-zinc-300">
-                                                {tag}
-                                            </span>
-                                        ))}
+                                </div>
+
+                                {/* Content Container (Refined Spacing) */}
+                                <div className="w-full flex flex-col justify-center px-2 md:px-0">
+                                    <div className="flex flex-col gap-4">
+                                        <h2 className="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
+                                            {video.title}
+                                        </h2>
+
+                                        <div className="h-1 w-12 bg-primary/30 rounded-full" />
+
+                                        <p className="text-lg text-zinc-400 font-medium leading-relaxed max-w-xl">
+                                            {video.description}
+                                        </p>
+
+                                        <div className="flex flex-wrap gap-2 mt-2">
+                                            {video.tags.map(tag => (
+                                                <span
+                                                    key={tag}
+                                                    className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.05] text-[11px] font-bold text-zinc-400 uppercase tracking-wider group-hover:border-primary/20 group-hover:text-zinc-200 transition-colors"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* How We Work Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="mt-32 md:mt-48 glass-panel p-10 md:p-16 relative overflow-hidden text-center border-primary/20"
-                    >
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 relative z-10">Nosso Processo <span className="text-primary">Criativo</span></h2>
+                    {/* How We Work Section - Enhanced Mobile Layout */}
+                    <div className="mt-32 md:mt-56 relative">
+                        {/* Decorative background for the section */}
+                        <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full scale-75 opacity-50 pointer-events-none" />
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 relative z-10">
+                        <div className="relative z-10 mb-16 text-center md:text-left md:flex md:items-end md:justify-between gap-8">
+                            <div className="max-w-2xl">
+                                <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6">
+                                    Nosso Processo <span className="text-primary italic">Criativo</span>
+                                </h2>
+                                <p className="text-xl text-zinc-400 font-medium leading-relaxed">
+                                    Transformamos cada detalhe em uma peça de comunicação impactante.
+                                </p>
+                            </div>
+                            <div className="hidden md:block h-px flex-1 bg-white/10 mb-6 mx-8" />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                             {[
                                 { step: "01", title: "Planejamento", desc: "Definimos os pontos-chave de cada condomínio para garantir que nada importante fique de fora." },
-                                { step: "02", title: "Captação", desc: "Equipamentos de ponta e captação aérea para um visual impactante e profissional." },
-                                { step: "03", title: "Edição", desc: "Ritmo moderno e transparência total em cada frame entregue." }
+                                { step: "02", title: "Captação", desc: "Equipamentos de ponta y captação aérea para um visual impactante e profissional." },
+                                { step: "03", title: "Edição", desc: "Ritmo moderno y transparência total em cada frame entregue." }
                             ].map((item, i) => (
-                                <div key={i} className="flex flex-col items-center group">
-                                    <div className="text-6xl font-display font-black text-white/5 group-hover:text-primary/20 transition-colors duration-500 mb-[-1.5rem]">
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="group relative p-8 md:p-10 rounded-[2.5rem] bg-surface-glass border border-white/5 backdrop-blur-sm overflow-hidden hover:border-primary/30 transition-all duration-500"
+                                >
+                                    <div className="absolute top-0 right-0 p-8 text-7xl font-display font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors duration-500 pointer-events-none">
                                         {item.step}
                                     </div>
-                                    <h4 className="text-2xl font-display font-bold text-white mb-3 group-hover:text-primary transition-colors">{item.title}</h4>
-                                    <p className="text-zinc-400 font-medium text-base leading-relaxed">{item.desc}</p>
-                                </div>
+
+                                    <div className="relative z-10">
+                                        <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl mb-6 border border-primary/20">
+                                            {item.step}
+                                        </div>
+                                        <h4 className="text-2xl font-display font-bold text-white mb-4 group-hover:text-primary transition-colors">{item.title}</h4>
+                                        <p className="text-zinc-400 font-medium text-lg leading-relaxed">{item.desc}</p>
+                                    </div>
+
+                                    {/* Animated Corner accent */}
+                                    <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-br from-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                </motion.div>
                             ))}
                         </div>
-                    </motion.div>
-
-                    {/* Final CTA */}
-                    <div className="mt-32 text-center pb-12">
-                        <h3 className="text-3xl font-display font-bold text-white mb-8">Quer uma comunicação assim no seu condomínio?</h3>
-                        <Link
-                            href={`/${locale}/#contato`}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-primary hover:bg-primary-hover text-black font-bold rounded-2xl transition-all hover:scale-105 shadow-[0_0_30px_rgba(27,204,148,0.3)] group"
-                        >
-                            Solicitar Orçamento
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </Link>
                     </div>
+
+                    {/* Final CTA - Premium Redesign */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="mt-40 relative rounded-[3rem] overflow-hidden p-12 md:p-24 text-center border border-white/10 bg-[#060606]"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+                        <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
+                        <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-[#0f7a58]/10 blur-[100px] rounded-full" />
+
+                        <div className="relative z-10">
+                            <h3 className="text-4xl md:text-6xl font-display font-bold text-white mb-10 max-w-3xl mx-auto leading-tight">
+                                Quer uma comunicação <span className="text-primary font-serif italic text-3xl md:text-5xl">assim</span> no seu condomínio?
+                            </h3>
+
+                            <Link
+                                href={`/${locale}/contato`}
+                                className="inline-flex items-center gap-4 px-10 py-5 bg-primary hover:bg-primary-hover text-black font-bold rounded-2xl transition-all hover:scale-105 shadow-[0_20px_40px_rgba(27,204,148,0.2)] group text-lg"
+                            >
+                                Solicitar Orçamento Grátis
+                                <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </div>
+                            </Link>
+                        </div>
+                    </motion.div>
 
                 </div>
             </main>
@@ -292,14 +243,14 @@ export default function Portfolio() {
                                 />
                             </Link>
                             <p className="text-zinc-400 text-sm leading-relaxed mb-6 font-medium">
-                                Transformando a comunicación do seu condomínio com transparência, modernidade e muita proximidade real.
+                                Transformando a comunicação do seu condomínio com transparência, modernidade e muita proximidade real.
                             </p>
 
                             <div className="flex items-center gap-4">
                                 {[
-                                    { name: 'Instagram', href: 'https://www.instagram.com/avizzodigital/', icon: <><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /></> },
-                                    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/condovaibe/', icon: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></> },
-                                    { name: 'YouTube', href: 'https://www.youtube.com/@AvizzoDigital', icon: <><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.17 1 12 1 12s0 3.83.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.83 23 12 23 12s0-3.83-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" /></> },
+                                    { name: 'Instagram', href: 'https://www.instagram.com/avizzodigital/', icon: <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /> },
+                                    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/condovaibe/', icon: <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /> },
+                                    { name: 'YouTube', href: 'https://www.youtube.com/@AvizzoDigital', icon: <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.17 1 12 1 12s0 3.83.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.83 23 12 23 12s0-3.83-.46-5.58z" /> },
                                 ].map((social) => (
                                     <a
                                         key={social.name}
@@ -319,10 +270,10 @@ export default function Portfolio() {
 
                         <div className="flex flex-col gap-4">
                             <h4 className="text-white font-display font-bold text-lg mb-2">Navegação</h4>
-                            {['Início', 'A Avizzo', 'Portfólio', 'Nossos Serviços', 'Portal'].map((link) => (
+                            {['Início', 'A Avizzo', 'Portfólio', 'Contato', 'Portal'].map((link) => (
                                 <Link
                                     key={link}
-                                    href={link === 'Início' ? `/${locale}` : link === 'A Avizzo' ? `/${locale}/a-avizzo` : link === 'Portfólio' ? `/${locale}/portfolio` : `/${locale}/#${link.toLowerCase().replace(' ', '-')}`}
+                                    href={link === 'A Avizzo' ? `/${locale}/a-avizzo` : link === 'Portfólio' ? `/${locale}/portfolio` : link === 'Início' ? `/${locale}` : link === 'Portal' ? `/${locale}/portal` : `/${locale}/contato`}
                                     className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
                                 >
                                     {link}
@@ -333,42 +284,36 @@ export default function Portfolio() {
                         <div className="flex flex-col gap-4">
                             <h4 className="text-white font-display font-bold text-lg mb-2">Suporte & Legal</h4>
                             {['Central de Ajuda', 'Política de Privacidade', 'Termos de Serviço', 'Portal do Cliente'].map((link) => (
-                                <a
-                                    key={link}
-                                    href="#"
-                                    className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
-                                >
-                                    {link}
-                                </a>
+                                link === 'Portal do Cliente' ? (
+                                    <Link
+                                        key={link}
+                                        href={`/${locale}/portal`}
+                                        className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
+                                    >
+                                        {link}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        key={link}
+                                        href="#"
+                                        className="text-zinc-400 font-medium text-sm hover:text-primary hover:translate-x-1 transition-all inline-flex w-fit"
+                                    >
+                                        {link}
+                                    </a>
+                                )
                             ))}
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <h4 className="text-white font-display font-bold text-lg mb-2">Contato</h4>
-
-                            <div className="group flex items-start gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                                <div className="flex flex-col">
-                                    <span className="text-sm text-zinc-400 font-medium">WhatsApp</span>
-                                    <a href="https://api.whatsapp.com/send/?phone=5591981555377&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors text-sm">(91) 98155-5377</a>
-                                </div>
-                            </div>
-
-                            <div className="group flex items-start gap-3 mt-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-                                <div className="flex flex-col">
-                                    <span className="text-sm text-zinc-400 font-medium">Email Institucional</span>
-                                    <a href="mailto:contato@avizzodigital.com.br" className="text-white hover:text-primary transition-colors text-sm">contato@avizzodigital.com.br</a>
-                                </div>
-                            </div>
-
-                            <div className="group flex items-start gap-3 mt-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                                <div className="flex flex-col">
-                                    <span className="text-sm text-zinc-400 font-medium">Localização</span>
-                                    <span className="text-white text-sm">Belém, PA - Brasil</span>
-                                </div>
-                            </div>
+                            <h4 className="text-white font-display font-bold text-lg mb-2">Contato Rápido</h4>
+                            <p className="text-zinc-400 text-xs font-medium">Dúvidas ou orçamentos?</p>
+                            <a href={`/${locale}/contato`} className="px-6 py-3 bg-primary/10 border border-primary/20 text-primary text-xs font-bold rounded-xl hover:bg-primary hover:text-black transition-all text-center">
+                                PÁGINA DE CONTATO
+                            </a>
+                            <a href="https://wa.me/5591981555377" className="text-zinc-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                                (91) 98155-5377
+                            </a>
                         </div>
 
                     </div>
