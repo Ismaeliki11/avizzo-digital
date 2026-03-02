@@ -133,7 +133,7 @@ export default function Home() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border-glass to-transparent" />
 
         {/* Abstract Green Glow in Background */}
-        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[60%] bg-primary/5 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
+        <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] md:w-[40%] md:h-[60%] bg-primary/5 blur-[80px] md:blur-[150px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
 
         <div className="max-w-7xl mx-auto px-6 relative">
           <motion.div
@@ -242,8 +242,8 @@ export default function Home() {
       {/* Premium Footer Section */}
       <footer className="relative border-t border-border-glass bg-background pt-20 pb-10 overflow-hidden z-10">
         {/* Subtle Background Elements */}
-        <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#0f7a58]/10 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
-        <div className="absolute top-[-20%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[50%] md:w-[50%] md:h-[50%] bg-[#0f7a58]/10 blur-[80px] md:blur-[150px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
+        <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/5 blur-[70px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">

@@ -14,8 +14,8 @@ export default function PortalEmConstrucao() {
         <div className="min-h-screen bg-background text-zinc-100 overflow-x-hidden selection:bg-primary/30">
             {/* Background Layer */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full mix-blend-screen" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/10 blur-[150px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/10 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] md:w-[30%] md:h-[50%] bg-[#0f7a58]/10 blur-[100px] md:blur-[150px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
             </div>
 
             <Navbar activeItem="Portal" />
@@ -25,7 +25,7 @@ export default function PortalEmConstrucao() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="max-w-2xl w-full text-center"
+                    className="max-w-2xl w-full text-center will-change-transform"
                 >
                     {/* Icon Animation */}
                     <div className="relative mb-12 flex justify-center">

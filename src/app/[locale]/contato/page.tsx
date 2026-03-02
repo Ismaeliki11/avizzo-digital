@@ -40,8 +40,8 @@ export default function Contato() {
 
             {/* Background Layer */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full mix-blend-screen" />
-                <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-[#0f7a58]/20 blur-[150px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/20 blur-[80px] md:blur-[120px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
+                <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] md:w-[30%] md:h-[50%] bg-[#0f7a58]/20 blur-[100px] md:blur-[150px] rounded-full mix-blend-screen will-change-[filter,opacity]" />
             </div>
 
             <Navbar activeItem="Contato" />
@@ -55,7 +55,7 @@ export default function Contato() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold mb-6"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold mb-6 will-change-transform"
                         >
                             <Coffee size={16} />
                             VAMOS MARCAR UM CAFÉ?
@@ -109,9 +109,10 @@ export default function Contato() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                                        className="flex items-center gap-6 p-6 rounded-[2rem] bg-surface-glass border border-border-glass hover:border-primary/40 hover:bg-white/5 transition-all group"
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, margin: "-20px" }}
+                                        transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                                        className="flex items-center gap-6 p-6 rounded-[2rem] bg-surface-glass border border-border-glass hover:border-primary/40 hover:bg-white/5 transition-all group will-change-[opacity,transform]"
                                     >
                                         <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shrink-0">
                                             {item.icon}
@@ -158,9 +159,10 @@ export default function Contato() {
                             {/* Google Maps Embed */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.6, delay: 0.7 }}
-                                className="relative rounded-[2.5rem] overflow-hidden border border-white/10 aspect-video lg:aspect-square shadow-2xl group"
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true, margin: "-20px" }}
+                                transition={{ duration: 0.6 }}
+                                className="relative rounded-[2.5rem] overflow-hidden border border-white/10 aspect-video lg:aspect-square shadow-2xl group will-change-[opacity,transform]"
                             >
                                 <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-700 pointer-events-none z-10" />
                                 <iframe
@@ -186,9 +188,10 @@ export default function Contato() {
                         <div className="lg:col-span-7">
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                                className="bg-surface-glass backdrop-blur-3xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden group"
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-40px" }}
+                                transition={{ duration: 0.8 }}
+                                className="bg-surface-glass backdrop-blur-md md:backdrop-blur-3xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden group will-change-[opacity,transform]"
                             >
                                 <div className="relative z-10">
                                     <div className="flex items-center gap-3 mb-10">
@@ -296,8 +299,8 @@ export default function Contato() {
 
             {/* Premium Footer Section */}
             <footer className="relative border-t border-border-glass bg-background pt-20 pb-10 overflow-hidden z-10">
-                <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#0f7a58]/10 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
-                <div className="absolute top-[-20%] right-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
+                <div className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[50%] md:w-[50%] md:h-[50%] bg-[#0f7a58]/10 blur-[80px] md:blur-[150px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
+                <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[40%] md:w-[40%] md:h-[40%] bg-primary/5 blur-[70px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">

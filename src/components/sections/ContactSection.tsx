@@ -29,8 +29,8 @@ export default function ContactSection() {
     return (
         <section id="contato" className="relative py-24 md:py-32 overflow-hidden z-20">
             {/* Background Decorations */}
-            <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
-            <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-[#0f7a58]/10 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
+            <div className="absolute top-1/4 right-0 w-[60%] h-[40%] md:w-96 md:h-96 bg-primary/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
+            <div className="absolute bottom-1/4 left-0 w-[50%] h-[30%] md:w-72 md:h-72 bg-[#0f7a58]/10 blur-[70px] md:blur-[100px] rounded-full pointer-events-none mix-blend-screen will-change-[filter,opacity]" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -83,9 +83,9 @@ export default function ContactSection() {
                                     href={item.href}
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                                    className="flex items-center gap-6 p-6 rounded-3xl bg-surface-glass border border-border-glass hover:border-primary/40 hover:bg-white/5 transition-all group"
+                                    viewport={{ once: true, margin: "-20px" }}
+                                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                                    className="flex items-center gap-6 p-6 rounded-3xl bg-surface-glass border border-border-glass hover:border-primary/40 hover:bg-white/5 transition-all group will-change-[opacity,transform]"
                                 >
                                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                                         {item.icon}
@@ -135,9 +135,9 @@ export default function ContactSection() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: true, margin: "-20px" }}
                             transition={{ duration: 0.8 }}
-                            className="bg-surface-glass backdrop-blur-3xl border border-white/10 rounded-[40px] p-8 md:p-12 shadow-2xl relative overflow-hidden group"
+                            className="bg-surface-glass backdrop-blur-md md:backdrop-blur-3xl border border-white/10 rounded-[40px] p-8 md:p-12 shadow-2xl relative overflow-hidden group will-change-[opacity,transform]"
                         >
                             {/* Animated Background Pulse for Form */}
                             <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none group-hover:bg-primary/10 transition-colors duration-1000" />
@@ -203,8 +203,8 @@ export default function ContactSection() {
                                         whileTap={{ scale: 0.98 }}
                                         disabled={isSubmitting}
                                         className={`w-full py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 transition-all ${isSubmitting
-                                                ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
-                                                : "bg-primary text-black hover:bg-primary-hover active:shadow-inner"
+                                            ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+                                            : "bg-primary text-black hover:bg-primary-hover active:shadow-inner"
                                             }`}
                                     >
                                         {isSubmitting ? (
