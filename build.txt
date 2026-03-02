@@ -1,0 +1,97 @@
+﻿
+> avizzo-digital@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.1.6 (Turbopack)
+
+node.exe : ÔÜá The "middleware" file convention is 
+deprecated. Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔÜá The 
+    "middle...leware-to-proxy:String) [], RemoteExc  
+  eption
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Creating an optimized production build ...
+Error: Cannot apply unknown utility class 
+`glass-panel`
+    [2m[at onInvalidCandidate (C:\Users\ismae\Deskto
+p\Paginas\avizzo-digital\node_modules\tailwindcss\dis
+t\lib.js:21:1511)][0m
+    [2m[at Ee (C:\Users\ismae\Desktop\Paginas\avizzo
+-digital\node_modules\tailwindcss\dist\lib.js:16:3674
+0)][0m
+    [2m[at C:\Users\ismae\Desktop\Paginas\avizzo-dig
+ital\node_modules\tailwindcss\dist\lib.js:21:355][0m
+    [2m[at Pr (C:\Users\ismae\Desktop\Paginas\avizzo
+-digital\node_modules\tailwindcss\dist\lib.js:3:1733)
+][0m
+    [2m[at _ (C:\Users\ismae\Desktop\Paginas\avizzo-
+digital\node_modules\tailwindcss\dist\lib.js:3:1377)]
+[0m
+    [2m[at Te (C:\Users\ismae\Desktop\Paginas\avizzo
+-digital\node_modules\tailwindcss\dist\lib.js:21:172)
+][0m
+    [2m[at pn (C:\Users\ismae\Desktop\Paginas\avizzo
+-digital\node_modules\tailwindcss\dist\lib.js:38:294)
+][0m
+    [2m[at async dn (C:\Users\ismae\Desktop\Paginas\
+avizzo-digital\node_modules\tailwindcss\dist\lib.js:3
+8:631)][0m
+    [2m[at async Xr (C:\Users\ismae\Desktop\Paginas\
+avizzo-digital\node_modules\@tailwindcss\node\dist\in
+dex.js:10:3417)][0m
+    [2m[at async N (C:\Users\ismae\Desktop\Paginas\a
+vizzo-digital\node_modules\@tailwindcss\postcss\dist\
+index.js:10:3979)][0m
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\ismae\Desktop\P
+aginas\avizzo-digital\src\app\globals.css:1:1: 
+Cannot apply unknown utility class `glass-panel`
+    at Input.error 
+(node_modules/postcss/lib/input.js:135:16) [C:\Users\
+ismae\Desktop\Paginas\avizzo-digital\.next\build\chun
+ks\node_modules_fe693df6._.js:4651:22]
+    at Root.error 
+(node_modules/postcss/lib/node.js:146:32) [C:\Users\i
+smae\Desktop\Paginas\avizzo-digital\.next\build\chunk
+s\node_modules_fe693df6._.js:928:38]
+    [at Object.Once (C:\Users\ismae\Desktop\Paginas\a
+vizzo-digital\node_modules\@tailwindcss\postcss\dist\
+index.js:10:6913)]
+    at async LazyResult.runAsync 
+(node_modules/postcss/lib/lazy-result.js:293:11) [C:\
+Users\ismae\Desktop\Paginas\avizzo-digital\.next\buil
+d\chunks\node_modules_fe693df6._.js:6206:21]
+    at async transform (turbopack:///[turbopack-node]
+/transforms/postcss.ts:70:34) [C:\Users\ismae\Desktop
+\Paginas\avizzo-digital\.next\build\chunks\[root-of-t
+he-server]__51225daf._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/ipc/e
+valuate.ts:92:23) [C:\Users\ismae\Desktop\Paginas\avi
+zzo-digital\.next\build\chunks\[root-of-the-server]__
+974941ed._.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/[locale]/layout.tsx [Server Component]
+
+
+    at async transform (turbopack:///[turbopack-node]
+/transforms/postcss.ts:70:34) [C:\Users\ismae\Desktop
+\Paginas\avizzo-digital\.next\build\chunks\[root-of-t
+he-server]__51225daf._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/ipc/e
+valuate.ts:92:23) [C:\Users\ismae\Desktop\Paginas\avi
+zzo-digital\.next\build\chunks\[root-of-the-server]__
+974941ed._.js:443:31])
