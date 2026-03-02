@@ -147,7 +147,7 @@ export default function Navbar({ activeItem }: NavbarProps) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsMenuOpen(false)}
-                            className="fixed inset-0 z-[80] bg-black/80 backdrop-blur-md md:hidden"
+                            className="fixed inset-0 z-[80] bg-black/60 backdrop-blur-sm md:hidden will-change-[opacity,backdrop-filter]"
                         />
 
                         {/* Side Menu Panel */}
@@ -155,12 +155,12 @@ export default function Navbar({ activeItem }: NavbarProps) {
                             initial={{ x: "100%", opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: "100%", opacity: 0 }}
-                            transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                            className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-[90] bg-[#0A0A0A] border-l border-white/10 shadow-[-20px_0_50px_rgba(0,0,0,0.8)] md:hidden pt-36 px-8 flex flex-col justify-between pb-12 overflow-y-auto"
+                            transition={{ type: "spring", damping: 35, stiffness: 250 }}
+                            className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm z-[90] bg-[#0A0A0A] border-l border-white/10 shadow-[-20px_0_50px_rgba(0,0,0,0.8)] md:hidden pt-36 px-8 flex flex-col justify-between pb-12 overflow-y-auto will-change-transform"
                         >
                             {/* Decorative background glow */}
-                            <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[40%] bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
-                            <div className="absolute bottom-[20%] left-[-20%] w-[50%] h-[30%] bg-[#0f7a58]/5 blur-[80px] rounded-full pointer-events-none" />
+                            <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[40%] bg-primary/10 blur-[80px] rounded-full pointer-events-none will-change-[filter,opacity]" />
+                            <div className="absolute bottom-[20%] left-[-20%] w-[50%] h-[30%] bg-[#0f7a58]/5 blur-[60px] rounded-full pointer-events-none will-change-[filter,opacity]" />
                             <nav className="flex flex-col gap-4">
                                 <div className="flex flex-col gap-1 mb-4">
                                     <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em]">Menu</p>
@@ -174,8 +174,8 @@ export default function Navbar({ activeItem }: NavbarProps) {
                                             key={item.name}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.1 + i * 0.05 }}
-                                            className="border-b border-white/[0.03] pb-4 last:border-0"
+                                            transition={{ delay: 0.05 + i * 0.04 }}
+                                            className="border-b border-white/[0.03] pb-4 last:border-0 will-change-[opacity,transform]"
                                         >
                                             <Link
                                                 href={item.href}
